@@ -2,28 +2,16 @@ import flet as ft
 
 def main(page: ft.Page):
     page.theme_mode = "light"
-    page.title = "Flet Counter Example"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-
-    txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, width=100)
-
-    def minus_click(e):
-        txt_number.value = str(int(txt_number.value) - 1)
-        txt_number.update()
+    new_task = ft.TextField(hint_text="What needs to be done?")
     
-    def plus_click(e):
-        txt_number.value = str(int(txt_number.value) + 1)
-        txt_number.update()
+    def add_clicked(e):
+        page.add(ft.Checkbox(label=new_task.value))
+        new_task.value = ""
+        page.update()
     
     page.add(
-        ft.Row(
-            [
-                ft.IconButton(ft.Icons.REMOVE, on_click=minus_click),
-                txt_number,
-                ft.IconButton(ft.Icons.ADD, on_click=plus_click)
-            ],
-            alignment=ft.MainAxisAlignment.CENTER
-        )
+        new_task, 
+        ft.FloatingActionButton(icon=ft.Icons.ADD, on_click=add_clicked)
     )
     
 
